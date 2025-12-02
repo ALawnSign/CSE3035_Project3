@@ -1,1 +1,57 @@
-This is the README.
+Group Members: Logan Gwilt
+
+How to compile and run:
+
+# TYPE THE LINE BELOW, DO NOT INCLUDE "<" OR ">" #
+PARAM=[desired number of nodes] make
+
+For cleaning up:
+
+make clean
+
+File Names:
+
+Name: classes.py
+Description: Consolidates the classes into one file.
+
+Name: main.py
+Description: Handles functionality provided by the classes.
+
+
+|Feature                                                                                   |Status/Description                                            |
+|:-----------------------------------------------------------------------------------------|-------------------------------------------------------------:|
+|Project compiles and builds without warnings or errors                                    |Partial. Sometimes a dict error.                              |    
+|Switch class                                                                              |Partial. See below.                                           |
+|CAS, CCS swithces has a frame queue, and reads/writes appropriately                       |Partial. CCS does not have a frame queue.                     |
+|CAS/CCS allows multiple connections                                                       |Complete                                                      |
+|CAS/CCS floods frame when it doesn't know the destination                                 |Complete                                                      |
+|CAS/CCS learns destinations and doesn't forward packet to any port except the one required|Partial. Somtimes forwards ack frames and to the sending node.|
+|CAS receives local firewall rules                                                         |Complete. Done through a global list.                         |
+|CAS forwards traffic and ACKs properly                                                    |Partial. Seems to sometimes forward ACKs to other nodes.      |
+|CCS switch opens the firewall file and gets the rules                                     |Complete                                                      |
+|CCS passes global traffic                                                                 |Partial. Sometimes seems to just ignore global traffic.       |
+|CCS does the global firewalls                                                             |Complete.                                                     |
+|CCS shadow swithces run and test properly                                                 |Missing.                                                      |
+|Node class                                                                                |Partial. See below.                                           |
+|Nodes instantiate and open connection to the switch                                       |Complete                                                      |
+|Nodes open their input files and save data that they received                             |Partial. They seem to save ack frames as well.                |
+|Nodes will sometimes drop acknowledgement                                                 |Missing.                                                      |
+|Nodes will sometimes create erroneous frame                                               |Missing.                                                      |
+|Nodes will sometimes reject traffic                                                       |Missing.                                                      |
+
+# FRAME FORMAT #
+ORDER: [SRC][DST][CRC][SIZE/ACK][DATA]
+
+SRC: 1 byte
+DST: 1 byte
+SIZE/ACK: 1 byte
+DATA: 1 - 1024 bytes
+
+# KNOWN BUGS #
+1) Sometimes there is an error where the dict changes while it is being traversed. It is not consistent.
+2) Sometimes nodes seem to save ack/empty frames, as well as flood frames that include themselves.
+3) Either some nodes aren't connected by the time they need to receive and the frame gets lost in global transit, or the node disconnects before it can properly receive it.
+4) If there is no file for an AS to read from, it sometimes doesn't compile correctly. Uncertain if this is needed to be accounted for.
+
+# GITHUB LINK #
+https://github.com/ALawnSign/CSE3035_Project3
